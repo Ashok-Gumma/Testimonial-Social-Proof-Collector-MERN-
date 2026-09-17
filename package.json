@@ -1,0 +1,34 @@
+{
+  "name": "testimonial-social-proof-collector",
+  "version": "1.0.0",
+  "description": "Premium Production-Grade Testimonial & Social Proof Collector SaaS (MERN Stack)",
+  "main": "server/src/server.ts",
+  "scripts": {
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "build": "npm run build:server && npm run build:client",
+    "seed": "npm --prefix server run seed",
+    "start": "npm --prefix server run start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "keywords": [
+    "mern",
+    "testimonials",
+    "social-proof",
+    "react",
+    "node",
+    "express",
+    "mongodb",
+    "typescript",
+    "vite",
+    "tailwind"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}
