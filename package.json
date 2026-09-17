@@ -9,7 +9,7 @@
     "dev:client": "npm --prefix client run dev",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build:server": "npm --prefix server run build",
-    "build:client": "npm --prefix client run build",
+    "build:client": "npm --prefix client run build && node -e \"const fs = require('fs'); if (fs.existsSync('client/dist')) fs.cpSync('client/dist', 'dist', {recursive:true});\"",
     "build": "npm run build:server && npm run build:client",
     "seed": "npm --prefix server run seed",
     "start": "npm --prefix server run start"
