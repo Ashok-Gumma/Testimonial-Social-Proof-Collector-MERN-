@@ -4,11 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node ./node_modules/vite/bin/vite.js",
-    "build": "node ./node_modules/typescript/bin/tsc && node ./node_modules/vite/bin/vite.js build",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:client": "tsc && vite build",
     "lint": "eslint .",
-    "preview": "node ./node_modules/vite/bin/vite.js preview"
+    "preview": "vite preview"
   },
+
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@tanstack/react-query": "^5.62.7",
