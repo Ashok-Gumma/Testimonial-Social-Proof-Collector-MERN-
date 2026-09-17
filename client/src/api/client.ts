@@ -1,8 +1,20 @@
 import axios from 'axios';
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api`
+export const SERVER_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://proofpulse-api.onrender.com' : '');
+
+export const API_BASE_URL = SERVER_URL
+  ? `${SERVER_URL.replace(/\/$/, '')}/api`
   : '/api';
+
+export const getMediaUrl = (path?: string) => {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  if (path.startsWith('/uploads') || path.startsWith('uploads/')) {
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return SERVER_URL ? `${SERVER_URL.replace(/\/$/, '')}${cleanPath}` : cleanPath;
+  }
+  return path;
+};
 
 const api = axios.create({
   baseURL: API_BASE_URL,
