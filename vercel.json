@@ -1,6 +1,6 @@
 {
   "installCommand": "cd client && npm install",
-  "buildCommand": "cd client && npm run build && node -e \"const fs = require('fs'); if (fs.existsSync('dist')) fs.cpSync('dist', '../dist', {recursive:true});\"",
+  "buildCommand": "cd client && npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
