@@ -13,6 +13,9 @@ import analyticsRoutes from './routes/analyticsRoutes';
 
 const app = express();
 
+// Trust reverse proxies (Render, Vercel, Cloudflare, etc.)
+app.set('trust proxy', 1);
+
 // Disable x-powered-by header for security
 app.disable('x-powered-by');
 
@@ -21,7 +24,13 @@ app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps, curl, iframes, embed scripts)
-      if (!origin || origin.includes('localhost') || origin.includes('127.0.0.1') || origin === env.CLIENT_URL) {
+      if (
+        !origin ||
+        origin.includes('localhost') ||
+        origin.includes('127.0.0.1') ||
+        origin === env.CLIENT_URL ||
+        origin.endsWith('.vercel.app')
+      ) {
         callback(null, true);
       } else {
         callback(null, true); // Allow embedded iframe widgets from any origin
@@ -30,6 +39,7 @@ app.use(
     credentials: true,
   })
 );
+
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));

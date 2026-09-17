@@ -28,21 +28,24 @@ export const verifyRefreshToken = (token: string): TokenPayload => {
 };
 
 export const setRefreshTokenCookie = (res: Response, token: string): void => {
+  const isProduction = env.NODE_ENV === 'production';
   res.cookie('refreshToken', token, {
     httpOnly: true,
-    secure: env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     path: '/',
   });
 };
 
 export const clearRefreshTokenCookie = (res: Response): void => {
+  const isProduction = env.NODE_ENV === 'production';
   res.cookie('refreshToken', '', {
     httpOnly: true,
-    secure: env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 0,
     path: '/',
   });
 };
+

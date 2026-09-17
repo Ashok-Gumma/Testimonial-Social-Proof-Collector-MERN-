@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import api, { setAccessToken } from '../api/client';
+import api, { setAccessToken, API_BASE_URL } from '../api/client';
 import { User } from '../types';
+
 
 interface AuthContextType {
   user: User | null;
@@ -38,8 +39,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       try {
-        const { data } = await axios.post('/api/auth/refresh', {}, { withCredentials: true });
+        const { data } = await axios.post(`${API_BASE_URL}/auth/refresh`, {}, { withCredentials: true });
         if (data.success && data.accessToken) {
+
           setAccessToken(data.accessToken);
           setUser(data.user);
         } else {
